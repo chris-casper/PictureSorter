@@ -4,11 +4,17 @@ An Electron based desktop app for triaging large batches of phone photos. I take
 
 Hence the super creative name. 
 
+![Main Screen](/assets/MainScreen.png)
 
 Ergo, Picture Sorter has two modes:
 
-- **Rough Sort** — thumbnails grouped couple different methods; drag photos or whole groups into a destination folder tree.
-- **Fine Sort** — one photo at a time, keep / toss / delete with single keystrokes.
+![Rough Sort](/assets/RoughSort.png)
+
+**Rough Sort** — thumbnails grouped couple different methods; drag photos or whole groups into a destination folder tree.
+
+![Fine Sort](/assets/FineSort.png)
+
+**Fine Sort** — one photo at a time, keep / toss / delete with single keystrokes.
 
 Built with [Electron](https://www.electronjs.org/). Targets Windows, theoretically also runs on macOS/Linux but I haven't tested yet. 
 
@@ -129,6 +135,8 @@ This uses `electron-builder` to create an NSIS installer under a new `dist/` fol
 - **Undo** reverses the last action — including a delete (see limitations).
 - The **left/right arrow keys browse between photos without moving them**, so you can check ahead for duplicates before deciding.
 - A legend in the top bar shows the current keys, and the photo's metadata (dimensions, size, date, camera, ISO, aperture, GPS, etc.) shows along the bottom beside the buttons.
+
+![Settings](/assets/Settings.png)
 
 ### Settings
 
