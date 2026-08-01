@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; img-src 'self' media: data:; style-src 'self' 'unsafe-inline'; script-src 'self';" />
+  <title>Picture Sorter</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ==================== MAIN MENU ==================== -->
+  <section class="screen active" id="screen-main">
+    <div class="menu-wrap">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="6" width="18" height="14" rx="2"></rect>
+            <path d="M3 16l4.5-4.5a2 2 0 0 1 2.8 0L15 16"></path>
+            <path d="M14 15l1.8-1.8a2 2 0 0 1 2.8 0L21 16"></path>
+            <circle cx="9" cy="10" r="1.4"></circle>
+            <path d="M8 6l1.2-2.4A1 1 0 0 1 10.1 3h3.8a1 1 0 0 1 .9.6L16 6"></path>
+          </svg>
+        </div>
+        <div>
+          <h1>Picture Sorter</h1>
+          <p class="tagline">Triage a mountain of phone photos, fast.</p>
+        </div>
+      </div>
+
+      <div class="menu-tiles">
+        <button class="tile" data-goto="screen-rough">
+          <span class="tile-icon">
+            <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="7" height="7" rx="1.2"></rect>
+              <rect x="14" y="4" width="7" height="7" rx="1.2"></rect>
+              <rect x="3" y="14" width="7" height="6" rx="1.2"></rect>
+              <path d="M14 17h7"></path><path d="M17.5 14.5v5"></path>
+            </svg>
+          </span>
+          <span class="tile-title">Rough Sort</span>
+          <span class="tile-sub">Drag groups of photos into destination folders</span>
+        </button>
+
+        <button class="tile" data-goto="screen-fine">
+          <span class="tile-icon">
+            <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="4" width="16" height="12" rx="1.5"></rect>
+              <path d="M7 20h4"></path><path d="M13 20h4"></path>
+              <path d="M8.5 10.5l2 2 4-4"></path>
+            </svg>
+          </span>
+          <span class="tile-title">Fine Sort</span>
+          <span class="tile-sub">One photo at a time — keep or toss with a keystroke</span>
+        </button>
+      </div>
+
+      <button class="gear-btn" id="btn-open-settings" title="Settings" aria-label="Settings">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"></path>
+        </svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ==================== ROUGH SORT ==================== -->
+  <section class="screen" id="screen-rough">
+    <header class="topbar">
+      <button class="icon-btn back-btn" data-goto="screen-main" title="Back" aria-label="Back">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>
+      </button>
+      <h2>Rough Sort</h2>
+      <div class="spacer"></div>
+
+      <button class="sortdir-btn" id="rough-sortdir" data-dir="asc" title="Sort direction (ascending / descending)" aria-label="Toggle sort direction">
+        <svg class="ar ar-up" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V6"></path><path d="M6 12l6-6 6 6"></path></svg>
+        <svg class="ar ar-down" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v13"></path><path d="M6 12l6 6 6-6"></path></svg>
+      </button>
+
+      <label class="ctrl">Group
+        <select id="rough-grouping">
+          <option value="cluster">By time cluster</option>
+          <option value="day">By day</option>
+          <option value="month">By month</option>
+          <option value="location">By location</option>
+          <option value="name">By name</option>
+          <option value="type">By file type</option>
+          <option value="none">No grouping</option>
+        </select>
+      </label>
+
+      <label class="ctrl">Size
+        <select id="rough-size">
+          <option value="small">Small</option>
+          <option value="medium">Medium</option>
+          <option value="large">Large</option>
+        </select>
+      </label>
+    </header>
+
+    <div class="rough-body">
+      <!-- LEFT: destination folder tree -->
+      <aside class="panel dest-panel">
+        <div class="panel-head">
+          <span class="panel-title">Destination</span>
+          <div class="spacer"></div>
+          <button class="folder-select-btn compact" id="rough-pick-dest">Choose folder…</button>
+        </div>
+        <button class="new-folder-btn" id="rough-new-folder" title="Create a new folder inside the selected folder">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <path d="M12 11v4"></path><path d="M10 13h4"></path>
+          </svg>
+          <span>New folder</span>
+        </button>
+        <div class="tree-scroll" id="rough-tree"></div>
+        <p class="hint">Drag photos onto a folder to move them. Drag a folder to reorganize it. Right-click a folder to rename or delete.</p>
+      </aside>
+
+      <!-- RIGHT: source photos -->
+      <main class="panel photo-panel">
+        <div class="panel-head">
+          <span class="panel-title">Photos</span>
+          <span class="count-pill" id="rough-count">0</span>
+          <div class="spacer"></div>
+          <button class="folder-select-btn compact" id="rough-pick-src">Choose photo folder…</button>
+        </div>
+        <div class="photo-scroll" id="rough-photos">
+          <div class="empty-state" id="rough-empty">
+            <p>Pick a folder of photos to begin.</p>
+            <p class="sub">They’ll be grouped by time so you can drag whole events at once.</p>
+          </div>
+        </div>
+      </main>
+    </div>
+  </section>
+
+  <!-- ==================== FINE SORT ==================== -->
+  <section class="screen" id="screen-fine">
+    <header class="topbar">
+      <button class="icon-btn back-btn" data-goto="screen-main" title="Back" aria-label="Back">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>
+      </button>
+      <h2>Fine Sort</h2>
+      <span class="key-legend" id="fine-legend"></span>
+      <div class="spacer"></div>
+      <span class="progress-pill" id="fine-progress">—</span>
+      <button class="folder-select-btn compact" id="fine-pick">Choose folder…</button>
+    </header>
+
+    <div class="fine-body" id="fine-body">
+      <div class="empty-state center" id="fine-empty">
+        <p>Pick a folder of photos to review.</p>
+        <p class="sub">Each photo moves to <b>Good</b> or <b>Bad</b> as you decide.</p>
+      </div>
+
+      <div class="fine-setup hidden" id="fine-setup">
+        <p>This folder doesn’t have <b>Good</b> and <b>Bad</b> subfolders yet.</p>
+        <button class="primary-btn" id="fine-create-gb">Create Good &amp; Bad folders</button>
+      </div>
+
+      <div class="fine-stage hidden" id="fine-stage">
+        <div class="stage-image-wrap">
+          <img id="fine-image" alt="" />
+          <div class="stage-fallback hidden" id="fine-fallback">
+            <p>Preview unavailable for this format.</p>
+            <p class="sub" id="fine-fallback-name"></p>
+          </div>
+        </div>
+
+        <div class="fine-bottom">
+          <div class="fine-actions">
+            <button class="verdict-btn undo" id="fine-undo" title="Undo last action">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14L4 9l5-5"></path><path d="M4 9h11a5 5 0 0 1 0 10h-3"></path></svg>
+              <span class="verdict-key" id="fine-undo-key"></span>
+            </button>
+            <button class="verdict-btn bad" id="fine-bad" title="Move to Bad">
+              <span class="verdict-label">Bad</span>
+              <span class="verdict-key" id="fine-bad-key"></span>
+            </button>
+            <button class="verdict-btn good" id="fine-good" title="Move to Good">
+              <span class="verdict-label">Good</span>
+              <span class="verdict-key" id="fine-good-key"></span>
+            </button>
+            <button class="verdict-btn delete" id="fine-delete" title="Delete to Recycle Bin">
+              <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2"></path><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path></svg>
+              <span class="verdict-label">Delete</span>
+              <span class="verdict-key" id="fine-delete-key"></span>
+            </button>
+          </div>
+
+          <div class="meta-strip" id="fine-meta">
+            <span class="meta-empty">metadata will appear here</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="fine-done hidden" id="fine-done">
+        <p>All done — every photo in this folder has been sorted.</p>
+        <button class="primary-btn" id="fine-reload">Choose another folder</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SETTINGS ==================== -->
+  <section class="screen" id="screen-settings">
+    <header class="topbar">
+      <button class="icon-btn back-btn" data-goto="screen-main" title="Back" aria-label="Back">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>
+      </button>
+      <h2>Settings</h2>
+    </header>
+
+    <div class="settings-body">
+      <div class="settings-card">
+        <h3>Fine Sort keys</h3>
+        <p class="card-hint">Click a field, then press the key you want to use.</p>
+        <div class="setting-row">
+          <label>Keep (Good)</label>
+          <button class="keycap" data-keybind="goodKey" id="set-good">—</button>
+        </div>
+        <div class="setting-row">
+          <label>Toss (Bad)</label>
+          <button class="keycap" data-keybind="badKey" id="set-bad">—</button>
+        </div>
+        <div class="setting-row">
+          <label>Delete (Recycle Bin)</label>
+          <button class="keycap" data-keybind="deleteKey" id="set-delete">—</button>
+        </div>
+        <div class="setting-row">
+          <label>Undo last action</label>
+          <button class="keycap" data-keybind="undoKey" id="set-undo">—</button>
+        </div>
+        <div class="setting-row">
+          <label>Browse previous (no move)</label>
+          <button class="keycap" data-keybind="prevKey" id="set-prev">—</button>
+        </div>
+        <div class="setting-row">
+          <label>Browse next (no move)</label>
+          <button class="keycap" data-keybind="nextKey" id="set-next">—</button>
+        </div>
+      </div>
+
+      <div class="settings-card">
+        <h3>Rough Sort defaults</h3>
+        <div class="setting-row">
+          <label>Thumbnail size</label>
+          <select id="set-thumb">
+            <option value="small">Small</option>
+            <option value="medium">Medium</option>
+            <option value="large">Large</option>
+          </select>
+        </div>
+        <div class="setting-row">
+          <label>Default grouping</label>
+          <select id="set-grouping">
+            <option value="cluster">By time cluster</option>
+            <option value="day">By day</option>
+            <option value="month">By month</option>
+            <option value="location">By location</option>
+            <option value="name">By name</option>
+            <option value="type">By file type</option>
+            <option value="none">No grouping</option>
+          </select>
+        </div>
+        <div class="setting-row">
+          <label>Time-cluster gap (minutes)</label>
+          <input type="number" id="set-gap" min="1" max="1440" step="1" />
+        </div>
+      </div>
+
+      <div class="settings-card">
+        <h3>Photo locations</h3>
+        <p class="card-hint">Turns GPS coordinates in your photos into place names so you can use “By location” grouping in Rough Sort. Uses OpenStreetMap’s free Nominatim service — coordinates are sent to openstreetmap.org, and results are cached on your computer so each place is looked up only once.</p>
+        <div class="setting-row">
+          <label>Enable location lookup</label>
+          <label class="switch"><input type="checkbox" id="set-geocode" /><span class="switch-slider"></span></label>
+        </div>
+      </div>
+
+      <div class="settings-card">
+        <h3>Appearance</h3>
+        <div class="setting-row">
+          <label>Theme</label>
+          <select id="set-theme">
+            <option value="dark">Dark</option>
+            <option value="light">Light</option>
+          </select>
+        </div>
+      </div>
+
+      <p class="saved-note" id="settings-saved">Saved</p>
+    </div>
+  </section>
+
+  <div class="toast" id="toast"></div>
+
+  <!-- fullscreen photo preview (double-click a thumbnail; single click to close) -->
+  <div class="photo-modal hidden" id="photo-modal">
+    <img id="photo-modal-img" alt="" draggable="false" />
+    <span class="photo-modal-name" id="photo-modal-name"></span>
+  </div>
+
+  <!-- folder right-click menu -->
+  <div class="ctx-menu hidden" id="folder-ctx">
+    <button data-act="rename">Rename…</button>
+    <button data-act="delete" class="danger">Delete…</button>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

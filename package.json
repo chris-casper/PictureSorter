@@ -1,0 +1,58 @@
+{
+  "name": "picture-sorter",
+  "version": "1.0.0",
+  "description": "Rough and fine photo sorting desktop app for triaging large batches of cell phone pictures.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win",
+    "pack": "electron-builder --dir"
+  },
+  "author": "PrecisionForm IT",
+  "license": "MIT",
+  "keywords": [
+    "electron",
+    "photos",
+    "photo-management",
+    "exif",
+    "desktop"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PrecisionFormIT/picture-sorter.git"
+  },
+  "devDependencies": {
+    "electron": "^31.7.7",
+    "electron-builder": "^24.13.3"
+  },
+  "dependencies": {
+    "exifr": "^7.1.3"
+  },
+  "build": {
+    "appId": "com.picturesorter.app",
+    "productName": "Picture Sorter",
+    "files": [
+      "main.js",
+      "preload.js",
+      "renderer/**/*",
+      "assets/**/*"
+    ],
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ],
+      "icon": "assets/icon.ico"
+    },
+    "portable": {
+      "artifactName": "PictureSorter-${version}-portable.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "shortcutName": "Picture Sorter"
+    }
+  }
+}
